@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wortarten-Metro</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+  </header>
+
+  <main class="metro-container">
+    <section id="main-menu" class="metro-screen">
+      <h1>Wortarten-Metro</h1>
+      <img class="metro-image metro-image-menu" src="resource/wortartenMetroV1.1.jpg" alt="Wortarten-Metro">
+      <div class="metro-actions">
+        <button class="btn" onclick="showScreen('game-screen')">Spiel starten</button>
+        <button class="btn btn-secondary" onclick="showScreen('editor-screen')">Fragen anpassen</button>
+      </div>
+      <a href="../../index.html" class="btn btn-secondary">Zurück zur Spieleauswahl</a>
+    </section>
+
+    <section id="game-screen" class="metro-screen" style="display: none;">
+      <h1>Wortarten-Metro</h1>
+      <div class="metro-board">
+        <img class="metro-image" src="resource/wortartenMetroV1.1.jpg" alt="Wortarten-Metro Karte">
+        <div class="card-stack" aria-live="polite">
+          <div class="sentence-card card-backdrop"></div>
+          <div class="sentence-card card-backdrop card-backdrop-small"></div>
+          <article id="sentence-card" class="sentence-card">
+            <div class="card-face card-front">
+              <span class="card-label">Satz-Karte</span>
+              <p id="sentence-text">Ziehe eine Satz-Karte.</p>
+            </div>
+            <div class="card-face card-back">
+              <span class="card-label">Lösung</span>
+              <p id="solution-text"></p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="metro-actions">
+        <button class="btn" onclick="drawSentence()">Neue Satz-Karte ziehen</button>
+        <button class="btn btn-secondary" onclick="flipCard()">Karte umdrehen</button>
+      </div>
+      <p id="game-status" class="game-status"></p>
+      <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+    </section>
+
+    <section id="editor-screen" class="metro-screen" style="display: none;">
+      <h1>Fragen anpassen</h1>
+      <div class="editor-card">
+        <h2>Fragenset auswählen oder anlegen</h2>
+        <div class="editor-inline">
+          <input id="new-set-name" type="text" placeholder="z. B. Klasse 7">
+          <button class="btn" onclick="createNewSet()">Set erstellen</button>
+        </div>
+        <div class="form-group">
+          <label for="select-active-set">Aktives Set:</label>
+          <select id="select-active-set" onchange="loadActiveSet()"></select>
+        </div>
+      </div>
+
+      <div id="question-form-card" class="editor-card" style="display: none;">
+        <h2>Neue Satz-Karte hinzufügen</h2>
+        <form id="question-form" onsubmit="addSentence(event)">
+          <div class="form-group">
+            <label for="sentence-input">Satz / Aufgabe</label>
+            <textarea id="sentence-input" required placeholder="Das ist ein schöner Testsatz"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="solution-input">Lösung</label>
+            <textarea id="solution-input" required placeholder="Das = Artikel-Linie, ist = Verb-Linie, Umstieg an Station ..."></textarea>
+          </div>
+          <button class="btn" type="submit">Satz-Karte speichern</button>
+        </form>
+        <h2 class="question-list-heading">Enthaltene Satz-Karten</h2>
+        <div id="questions-list"></div>
+      </div>
+
+      <div class="metro-actions">
+        <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="storage.js"></script>
+  <script src="metro.js"></script>
+</body>
+</html>

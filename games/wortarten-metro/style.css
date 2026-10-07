@@ -1,0 +1,227 @@
+.metro-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.metro-screen {
+  width: 100%;
+  text-align: center;
+}
+
+.metro-container h1 {
+  margin-bottom: 0;
+}
+
+.metro-image-menu {
+  max-height: 45vh;
+}
+
+.metro-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 190px);
+  object-fit: contain;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: #000;
+}
+
+.metro-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.metro-container .btn {
+  margin-right: 0;
+}
+
+.metro-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin-top: 10px;
+}
+
+.metro-board > .metro-image {
+  position: static;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 170px);
+  object-fit: contain;
+  opacity: 1;
+}
+
+.card-stack {
+  position: relative;
+  width: min(90%, 600px);
+  min-height: 280px;
+  perspective: 1000px;
+}
+
+.sentence-card {
+  position: relative;
+  z-index: 3;
+  min-height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.sentence-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  border: 3px solid var(--accent-yellow);
+  border-radius: 14px;
+  background: linear-gradient(145deg, #18234b, #070a18);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.55);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #233c38, #071512);
+}
+
+.card-label {
+  color: var(--accent-yellow);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.card-face p {
+  font-size: 1.35rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.card-backdrop {
+  position: absolute;
+  z-index: 1;
+  inset: 12px -12px -12px 12px;
+  min-height: 280px;
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  background: #10152b;
+  transform: rotate(2deg);
+}
+
+.card-backdrop-small {
+  z-index: 2;
+  inset: 7px -7px -7px 7px;
+  transform: rotate(-1deg);
+}
+
+.game-status {
+  min-height: 1.5em;
+  color: var(--accent-yellow);
+}
+
+.editor-card {
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.editor-card h2 {
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+.editor-inline {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.editor-inline input,
+.editor-card input,
+.editor-card select,
+.editor-card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background: #111;
+  color: white;
+  font: inherit;
+}
+
+.editor-inline input {
+  flex: 1;
+}
+
+.editor-card textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  color: var(--accent-yellow);
+}
+
+.question-list-heading {
+  margin-top: 30px;
+}
+
+.question-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.delete-question-btn {
+  flex-shrink: 0;
+  margin: 0;
+  background: var(--red-wrong);
+}
+
+@media (max-width: 600px) {
+  .editor-inline {
+    flex-direction: column;
+  }
+
+  .card-face {
+    padding: 22px;
+  }
+
+  .card-face p {
+    font-size: 1.1rem;
+  }
+}

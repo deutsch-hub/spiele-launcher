@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wer wird Millionär?</title>
+  <!-- Relativer Pfad zum globalen CSS & Storage -->
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+  </header>
+
+  <div class="container">
+
+    <div id="main-menu" class="wwm-screen">
+      <div class="wwm-header">
+        <div class="wwm-logo">
+          <div class="wwm-logo-text">WER WIRD<br>MILLIONÄR</div>
+        </div>
+      </div>
+      <h2>Wer wird Millionär?</h2>
+      <div class="menu-actions">
+        <button class="btn" onclick="showScreen('game-setup')">Spiel starten</button>
+        <button class="btn btn-secondary" onclick="showScreen('editor-screen')">Fragen anpassen</button>
+      </div>
+    </div>
+
+    <div id="game-setup" class="wwm-screen" style="display: none;">
+      <h2>Spiel starten</h2>
+      <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); max-width: 400px; margin: 0 auto;">
+        <label style="display: block; margin-bottom: 10px; color: var(--accent-yellow);">Wähle ein Fragenset:</label>
+        <select id="select-set-game" style="width: 100%; padding: 10px; background: #111; color: white; border-radius: 5px; margin-bottom: 15px;"></select>
+        <button class="btn" onclick="launchGame()">Spiel starten 🚀</button>
+      </div>
+      <div class="screen-navigation">
+        <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+      </div>
+    </div>
+
+    <div id="game-screen" class="wwm-screen" style="display: none; width: 100%; max-width: 800px;">
+      <div class="wwm-header">
+        <div class="wwm-logo">
+          <div class="wwm-logo-text">WER WIRD<br>MILLIONÄR</div>
+        </div>
+      </div>
+
+      <div class="status-bar" id="game-status">Frage 1</div>
+
+      <div class="wwm-box" id="question-text">Frage wird geladen...</div>
+
+      <div class="wwm-answers">
+        <button class="wwm-answer-btn" data-letter="A" onclick="checkAnswer('A')">
+          <span class="prefix">A</span> <span id="ans-A">---</span>
+        </button>
+        <button class="wwm-answer-btn" data-letter="B" onclick="checkAnswer('B')">
+          <span class="prefix">B</span> <span id="ans-B">---</span>
+        </button>
+        <button class="wwm-answer-btn" data-letter="C" onclick="checkAnswer('C')">
+          <span class="prefix">C</span> <span id="ans-C">---</span>
+        </button>
+        <button class="wwm-answer-btn" data-letter="D" onclick="checkAnswer('D')">
+          <span class="prefix">D</span> <span id="ans-D">---</span>
+        </button>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+      </div>
+    </div>
+
+    <div id="editor-screen" class="wwm-screen" style="display: none; width: 100%;">
+      <h2>Fragensets verwalten</h2>
+
+      <div class="editor-card">
+        <h3>Neues Set anlegen oder auswählen</h3>
+        <div class="editor-inline">
+          <input type="text" id="new-set-name" placeholder="z.B. Set_Klasse_8">
+          <button class="btn" onclick="createNewSet()">Set erstellen</button>
+        </div>
+        <div class="form-group">
+          <label for="select-active-set">Aktives Set:</label>
+          <select id="select-active-set" onchange="loadActiveSet()"></select>
+        </div>
+      </div>
+
+      <div class="editor-card" id="question-form-card" style="display: none;">
+        <h3>Neue Frage zum Set hinzufügen</h3>
+        <form id="question-form" onsubmit="addQuestion(event)">
+          <div class="form-group">
+            <label for="q-difficulty">Schwierigkeitsstufe:</label>
+            <select id="q-difficulty">
+              <option value="1">Stufe 1 (Leicht)</option>
+              <option value="2">Stufe 2 (Mittel)</option>
+              <option value="3">Stufe 3 (Schwer)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="q-text">Fragetext:</label>
+            <input type="text" id="q-text" required placeholder="Frage eingeben...">
+          </div>
+          <div class="answers-form">
+            <div class="form-group"><label for="q-a">Antwort A:</label><input type="text" id="q-a" required></div>
+            <div class="form-group"><label for="q-b">Antwort B:</label><input type="text" id="q-b" required></div>
+            <div class="form-group"><label for="q-c">Antwort C:</label><input type="text" id="q-c" required></div>
+            <div class="form-group"><label for="q-d">Antwort D:</label><input type="text" id="q-d" required></div>
+          </div>
+          <div class="form-group">
+            <label for="q-correct">Richtige Antwort:</label>
+            <select id="q-correct">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+            </select>
+          </div>
+          <button type="submit" class="btn">Frage speichern</button>
+        </form>
+        <h3 class="question-list-heading">Enthaltene Fragen:</h3>
+        <div id="questions-list"></div>
+      </div>
+
+      <div class="editor-card">
+        <h3>Backup / Import &amp; Export</h3>
+        <button class="btn btn-secondary" onclick="exportSets()">Sets herunterladen</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">Sets hochladen</button>
+        <input type="file" id="import-file" hidden onchange="importSets(event, updateEditorSetsDropdown)" accept=".json">
+      </div>
+
+      <div class="screen-navigation">
+        <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="game.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>

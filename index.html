@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deutschunterricht Spiele-Lounge</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .game-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--game-card-image);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.45;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .game-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(3, 4, 8, 0.15), rgba(3, 4, 8, 0.9));
+    }
+    .game-card > * {
+      position: relative;
+      z-index: 1;
+    }
+    .game-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-yellow);
+    }
+    .game-card:hover::before {
+      opacity: 0.6;
+      transform: scale(1.04);
+    }
+    .game-card-placeholder {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .game-card-placeholder:hover {
+      transform: none;
+      border-color: var(--border-color);
+    }
+    .game-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0;
+      color: var(--accent-yellow);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo-text">Deutsch-Spiele Hub</a>
+  </header>
+
+  <div class="container">
+    <div class="game-grid">
+      <a href="games/wwm/index.html" class="game-card" style="--game-card-image: url('games/wwm/resources/wer-wird-millionaer.jpg');">
+        <h3>Wer wird Millionär?</h3>
+      </a>
+
+      <a href="games/wortarten-metro/index.html" class="game-card" style="--game-card-image: url('games/wortarten-metro/resource/wortartenMetroV1.1.jpg');">
+        <h3>Wortarten-Metro</h3>
+      </a>
+
+      <div class="game-card game-card-placeholder">
+        <h3>Spiel 3</h3>
+      </div>
+
+      <div class="game-card game-card-placeholder">
+        <h3>Spiel 4</h3>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
