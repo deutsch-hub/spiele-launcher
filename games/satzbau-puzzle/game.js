@@ -117,12 +117,21 @@ function renderAnswer() {
     return;
   }
 
-  selectedWords.forEach(({ word }) => {
-    const answerWord = document.createElement("span");
+  selectedWords.forEach(({ word }, selectedIndex) => {
+    const answerWord = document.createElement("button");
+    answerWord.type = "button";
     answerWord.className = "word-button answer-word";
     answerWord.textContent = word;
+    answerWord.title = "Wort zurück in die Auswahl legen";
+    answerWord.addEventListener("click", () => returnWordToBank(selectedIndex));
     answerArea.append(answerWord);
   });
+}
+
+function returnWordToBank(selectedIndex) {
+  const [selectedWord] = selectedWords.splice(selectedIndex, 1);
+  wordBank.append(createWordButton(selectedWord.word, selectedWord.index));
+  renderAnswer();
 }
 
 function resetRound() {
