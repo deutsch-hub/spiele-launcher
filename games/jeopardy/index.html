@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team-Duell</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+  </header>
+
+  <main class="container jeopardy-container">
+    <section id="main-menu" class="jeopardy-screen">
+      <h1>Team-Duell</h1>
+      <p class="intro">Spielt in Teams und testet euer Deutschwissen.</p>
+      <button class="btn" type="button" onclick="showScreen('setup-screen')">Spiel starten</button>
+      <button class="btn btn-secondary" type="button" onclick="showScreen('editor-screen')">Sets einstellen</button>
+      <a href="../../index.html" class="btn btn-secondary">Zurück zur Spieleauswahl</a>
+    </section>
+
+    <section id="setup-screen" class="jeopardy-screen" style="display: none;">
+      <h1>Spiel einrichten</h1>
+      <div class="setup-card">
+        <label for="select-set-game">Quiz-Set</label>
+        <select id="select-set-game"></select>
+        <label for="team-count">Anzahl der Teams</label>
+        <select id="team-count">
+          <option value="2">2 Teams</option>
+          <option value="3">3 Teams</option>
+          <option value="4">4 Teams</option>
+        </select>
+        <div id="team-fields"></div>
+        <button class="btn" type="button" onclick="startGame()">Quiz starten</button>
+      </div>
+      <button class="btn btn-secondary" type="button" onclick="showScreen('main-menu')">Zurück</button>
+    </section>
+
+    <section id="editor-screen" class="jeopardy-screen" style="display: none;">
+      <h1>Sets einstellen</h1>
+      <div class="setup-card editor-card">
+        <h2>Set auswählen oder anlegen</h2>
+        <div class="editor-inline">
+          <input id="new-set-name" type="text" placeholder="z. B. Klasse 8">
+          <button class="btn" type="button" onclick="createSet()">Set erstellen</button>
+        </div>
+        <label for="select-active-set">Aktives Set</label>
+        <select id="select-active-set"></select>
+      </div>
+
+      <div id="category-editor" class="setup-card editor-card" hidden>
+        <h2>Neue Kategorie</h2>
+        <form id="category-form">
+          <label for="category-name">Kategoriename</label>
+          <input id="category-name" type="text" required placeholder="z. B. Grammatik">
+          <button class="btn" type="submit">Kategorie hinzufügen</button>
+        </form>
+        <div id="categories-list"></div>
+      </div>
+
+      <button class="btn btn-secondary" type="button" onclick="showScreen('main-menu')">Zum Hauptmenü</button>
+    </section>
+
+    <section id="game-screen" class="jeopardy-screen" style="display: none;">
+      <div class="game-heading">
+        <div>
+          <h1>Team-Duell</h1>
+          <p id="turn-label" class="turn-label"></p>
+        </div>
+        <button class="btn btn-secondary" type="button" onclick="showScreen('main-menu')">Beenden</button>
+      </div>
+      <div id="scoreboard" class="scoreboard"></div>
+      <div id="game-board" class="game-board"></div>
+      <div id="winner-panel" class="winner-panel" hidden>
+        <div class="winner-trophy" aria-hidden="true">🏆</div>
+        <p class="winner-kicker">Das Team-Duell ist beendet!</p>
+        <h2 id="winner-title"></h2>
+        <p id="winner-score"></p>
+        <button class="btn" type="button" onclick="showScreen('main-menu')">Zum Hauptmenü</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="question-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-category" hidden>
+    <div class="question-modal">
+      <p id="modal-category" class="modal-category"></p>
+      <p id="modal-value" class="modal-value"></p>
+      <p id="timer" class="timer" aria-live="polite">30</p>
+      <h2 id="modal-question"></h2>
+      <div id="modal-answer" class="modal-answer" hidden></div>
+      <div class="modal-actions">
+        <button id="show-answer-button" class="btn" type="button">Lösung anzeigen</button>
+        <button id="correct-button" class="btn correct-button" type="button" disabled>Richtig</button>
+        <button id="wrong-button" class="btn btn-secondary" type="button" disabled>Falsch</button>
+        <button id="close-modal-button" class="btn btn-secondary" type="button">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

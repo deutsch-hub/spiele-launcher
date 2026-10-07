@@ -147,6 +147,16 @@
   border-radius: 8px;
 }
 
+.setup-card {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.setup-card select {
+  display: block;
+  margin: 8px 0 16px;
+}
+
 .editor-card h2 {
   text-align: left;
   font-size: 1.2rem;

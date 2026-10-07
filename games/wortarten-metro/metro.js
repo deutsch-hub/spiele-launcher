@@ -6,12 +6,38 @@ function showScreen(screenId) {
   document.querySelectorAll('.metro-screen').forEach(screen => {
     screen.style.display = screen.id === screenId ? 'block' : 'none';
   });
-  if (screenId === 'game-screen') {
-    prepareGame();
+  if (screenId === 'game-setup') {
+    updateGameSetsDropdown();
   }
   if (screenId === 'editor-screen') {
     updateSetsDropdown();
   }
+}
+
+function updateGameSetsDropdown() {
+  const select = document.getElementById('select-set-game');
+  select.innerHTML = '';
+  Object.keys(getMetroSets()).forEach(key => {
+    const option = document.createElement('option');
+    option.value = key;
+    option.innerText = key;
+    select.appendChild(option);
+  });
+  if (currentSetKey) select.value = currentSetKey;
+}
+
+function startGame() {
+  const selectedSet = document.getElementById('select-set-game').value;
+  const sets = getMetroSets();
+
+  if (!selectedSet || !sets[selectedSet] || sets[selectedSet].length === 0) {
+    alert('Dieses Kartenset enthält noch keine Karten.');
+    return;
+  }
+
+  currentSetKey = selectedSet;
+  showScreen('game-screen');
+  prepareGame();
 }
 
 function prepareGame() {

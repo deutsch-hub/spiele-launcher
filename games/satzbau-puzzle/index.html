@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satzbau-Puzzle</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+  </header>
+
+  <main class="container puzzle-container">
+    <section id="main-menu" class="puzzle-screen">
+      <h1>Satzbau-Puzzle</h1>
+      <p class="intro">Baue die Sätze aus den Wörtern richtig zusammen.</p>
+      <div class="puzzle-actions">
+        <button class="btn" type="button" onclick="showScreen('game-setup')">Spiel starten</button>
+        <button class="btn btn-secondary" type="button" onclick="showScreen('editor-screen')">Sätze einstellen</button>
+      </div>
+      <a href="../../index.html" class="btn btn-secondary back-link">Zurück zur Spieleauswahl</a>
+    </section>
+
+    <section id="game-setup" class="puzzle-screen" style="display: none;">
+      <h1>Spiel starten</h1>
+      <p class="intro">Wähle ein Fragenset für deine Runde aus.</p>
+      <div class="setup-card">
+        <label for="select-set-game">Satzset:</label>
+        <select id="select-set-game"></select>
+        <button class="btn" type="button" onclick="startGame()">Spiel starten</button>
+      </div>
+      <button class="btn btn-secondary" type="button" onclick="showScreen('main-menu')">Zurück</button>
+    </section>
+
+    <section id="game-screen" class="puzzle-screen" style="display: none;">
+      <h1>Satzbau-Puzzle</h1>
+      <p class="intro">Bringe die Wörter in die richtige Reihenfolge.</p>
+
+      <div class="puzzle-status" aria-live="polite">
+        <span id="round-label">Satz 1</span>
+        <span id="score-label">Punkte: 0</span>
+      </div>
+
+      <div id="word-bank" class="word-bank" aria-label="Verfügbare Wörter"></div>
+      <div id="answer-area" class="answer-area" aria-live="polite">
+        <span class="answer-placeholder">Klicke die Wörter in der richtigen Reihenfolge an.</span>
+      </div>
+
+      <p id="feedback" class="feedback" role="status"></p>
+
+      <div class="puzzle-actions">
+        <button id="check-button" class="btn" type="button">Satz prüfen</button>
+        <button id="reset-button" class="btn btn-secondary" type="button">Zurücksetzen</button>
+        <button id="next-button" class="btn btn-secondary" type="button" hidden>Nächster Satz</button>
+      </div>
+
+      <a href="../../index.html" class="btn btn-secondary back-link">Zurück zur Spieleauswahl</a>
+      <button class="btn btn-secondary back-link" type="button" onclick="showScreen('main-menu')">Zum Hauptmenü</button>
+    </section>
+
+    <section id="editor-screen" class="puzzle-screen editor-screen" style="display: none;">
+      <h1>Sätze einstellen</h1>
+      <div class="setup-card">
+        <h2>Set auswählen oder anlegen</h2>
+        <div class="editor-inline">
+          <input id="new-set-name" type="text" placeholder="z. B. Klasse 7">
+          <button class="btn" type="button" onclick="createNewSet()">Set erstellen</button>
+        </div>
+        <div class="form-group">
+          <label for="select-active-set">Aktives Set:</label>
+          <select id="select-active-set" onchange="loadActiveSet()"></select>
+        </div>
+      </div>
+
+      <div id="sentence-form-card" class="setup-card" style="display: none;">
+        <h2>Neuen Satz hinzufügen</h2>
+        <form id="sentence-form" onsubmit="addSentence(event)">
+          <div class="form-group">
+            <label for="sentence-input">Satz</label>
+            <textarea id="sentence-input" required placeholder="Die Kinder lesen ein Buch."></textarea>
+          </div>
+          <button class="btn" type="submit">Satz speichern</button>
+        </form>
+        <h2 class="question-list-heading">Sätze im Set</h2>
+        <div id="sentences-list"></div>
+      </div>
+
+      <button class="btn btn-secondary" type="button" onclick="showScreen('main-menu')">Zum Hauptmenü</button>
+    </section>
+  </main>
+
+  <script src="storage.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

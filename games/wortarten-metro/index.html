@@ -17,10 +17,20 @@
       <h1>Wortarten-Metro</h1>
       <img class="metro-image metro-image-menu" src="resource/wortartenMetroV1.1.jpg" alt="Wortarten-Metro">
       <div class="metro-actions">
-        <button class="btn" onclick="showScreen('game-screen')">Spiel starten</button>
-        <button class="btn btn-secondary" onclick="showScreen('editor-screen')">Fragen anpassen</button>
+        <button class="btn" onclick="showScreen('game-setup')">Spiel starten</button>
+        <button class="btn btn-secondary" onclick="showScreen('editor-screen')">Karten einstellen</button>
       </div>
       <a href="../../index.html" class="btn btn-secondary">Zurück zur Spieleauswahl</a>
+    </section>
+
+    <section id="game-setup" class="metro-screen" style="display: none;">
+      <h1>Spiel starten</h1>
+      <div class="editor-card setup-card">
+        <label for="select-set-game">Kartenset:</label>
+        <select id="select-set-game"></select>
+        <button class="btn" onclick="startGame()">Spiel starten</button>
+      </div>
+      <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück</button>
     </section>
 
     <section id="game-screen" class="metro-screen" style="display: none;">
@@ -51,9 +61,9 @@
     </section>
 
     <section id="editor-screen" class="metro-screen" style="display: none;">
-      <h1>Fragen anpassen</h1>
+      <h1>Karten einstellen</h1>
       <div class="editor-card">
-        <h2>Fragenset auswählen oder anlegen</h2>
+        <h2>Kartenset auswählen oder anlegen</h2>
         <div class="editor-inline">
           <input id="new-set-name" type="text" placeholder="z. B. Klasse 7">
           <button class="btn" onclick="createNewSet()">Set erstellen</button>

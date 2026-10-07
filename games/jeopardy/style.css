@@ -1,0 +1,370 @@
+.jeopardy-container {
+  max-width: 1100px;
+}
+
+.jeopardy-screen {
+  width: 100%;
+  text-align: center;
+}
+
+.jeopardy-screen h1 {
+  color: var(--accent-yellow);
+}
+
+.intro {
+  margin-bottom: 24px;
+}
+
+.setup-card {
+  max-width: 600px;
+  margin: 0 auto 20px;
+  padding: 24px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.setup-card label {
+  display: block;
+  margin: 12px 0 6px;
+  color: var(--accent-yellow);
+  font-weight: bold;
+}
+
+.setup-card input,
+.setup-card select {
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  background: #111;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font: inherit;
+}
+
+.setup-card > select {
+  margin-bottom: 10px;
+}
+
+.editor-card h2 {
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.editor-inline {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.editor-inline input {
+  flex: 1;
+}
+
+#categories-list {
+  margin-top: 22px;
+}
+
+.category-editor {
+  margin-top: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+}
+
+.category-editor h3 {
+  display: inline-block;
+  margin-right: 10px;
+  color: var(--accent-yellow);
+}
+
+.category-editor ol {
+  margin: 10px 0;
+  padding-left: 24px;
+}
+
+.category-editor li {
+  margin: 5px 0;
+}
+
+.delete-category {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.question-editor-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 140px auto;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.question-editor-form input,
+.question-editor-form select {
+  min-width: 0;
+  padding: 9px;
+  color: #fff;
+  background: #111;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font: inherit;
+}
+
+.question-editor-form .btn {
+  margin: 0;
+  padding: 9px 12px;
+}
+
+.game-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.game-heading h1 {
+  margin-bottom: 4px;
+}
+
+.turn-label {
+  min-height: 1.5em;
+  color: var(--accent-yellow);
+  font-weight: bold;
+}
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.team-score {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.team-score span {
+  color: var(--accent-yellow);
+}
+
+.active-team {
+  border-color: var(--accent-yellow);
+  box-shadow: 0 0 12px rgba(241, 179, 18, 0.35);
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.board-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-header,
+.board-tile {
+  min-height: 72px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #283b78;
+  border: 1px solid #7186d3;
+  text-transform: uppercase;
+}
+
+.board-tile {
+  color: #f5c544;
+  background: #132b69;
+  border: 1px solid #5471bd;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.board-tile:hover:not(:disabled) {
+  background: #244993;
+  transform: translateY(-2px);
+}
+
+.used-tile {
+  color: #8c96ad;
+  background: #1b2033;
+  border-color: #343b52;
+  cursor: not-allowed;
+}
+
+.winner-panel {
+  margin: 28px auto 0;
+  padding: 30px 20px;
+  text-align: center;
+  background: linear-gradient(145deg, #3c2b08, #15101f);
+  border: 2px solid var(--accent-yellow);
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(241, 179, 18, 0.35);
+  animation: winner-appear 0.8s ease-out both;
+}
+
+.winner-panel[hidden] {
+  display: none;
+}
+
+.winner-trophy {
+  font-size: 3.5rem;
+  animation: trophy-bounce 1s ease-in-out 0.8s both;
+}
+
+.winner-kicker {
+  margin: 8px 0;
+  color: var(--accent-yellow);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.winner-panel h2 {
+  margin: 8px 0;
+  font-size: 2rem;
+}
+
+.winner-panel p:last-of-type {
+  font-size: 1.3rem;
+}
+
+@keyframes winner-appear {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes trophy-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.question-modal {
+  width: min(650px, 100%);
+  padding: 28px;
+  text-align: center;
+  background: linear-gradient(145deg, #18234b, #070a18);
+  border: 2px solid var(--accent-yellow);
+  border-radius: 12px;
+}
+
+.modal-category,
+.modal-value {
+  color: var(--accent-yellow);
+  font-weight: bold;
+}
+
+.modal-value {
+  font-size: 1.6rem;
+}
+
+.timer {
+  margin: 10px 0;
+  color: #ff8e8e;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.question-modal h2 {
+  margin: 18px 0;
+  line-height: 1.4;
+}
+
+.modal-answer {
+  margin-bottom: 18px;
+  padding: 12px;
+  color: #70e28c;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modal-actions .btn {
+  margin: 0;
+}
+
+.correct-button {
+  background: #218739;
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .game-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .game-board {
+    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+    gap: 4px;
+  }
+
+  .category-header,
+  .board-tile {
+    min-height: 64px;
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+
+  .board-tile {
+    font-size: 1rem;
+  }
+
+  .editor-inline,
+  .question-editor-form {
+    display: flex;
+    flex-direction: column;
+  }
+}
