@@ -263,4 +263,5 @@ checkButton.addEventListener("click", checkAnswer);
 resetButton.addEventListener("click", resetRound);
 nextButton.addEventListener("click", nextRound);
 
-showScreen("main-menu");
+const requestedScreen = new URLSearchParams(window.location.search).get("screen");
+showScreen(requestedScreen === "editor-screen" ? "editor-screen" : "main-menu");

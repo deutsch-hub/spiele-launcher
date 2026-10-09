@@ -62,6 +62,49 @@
   opacity: 1;
 }
 
+.metro-game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.7fr);
+  align-items: center;
+  gap: 40px;
+  max-width: 1050px;
+  margin: 20px auto 0;
+}
+
+.metro-game-layout > .metro-image {
+  grid-column: 1;
+  grid-row: 1;
+  width: 130%;
+  max-width: 130%;
+  margin-left: -15%;
+}
+
+.metro-game-controls {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.metro-game-controls .metro-actions {
+  margin: 0;
+}
+
+.metro-game-controls .game-status {
+  margin: 0;
+}
+
+.sentence-card {
+  cursor: pointer;
+}
+
+.sentence-card:focus-visible {
+  outline: 3px solid #2f8f83;
+  outline-offset: 5px;
+}
+
 .card-stack {
   position: relative;
   width: min(90%, 600px);
@@ -185,6 +228,12 @@
   flex: 1;
 }
 
+.editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .editor-card textarea {
   min-height: 90px;
   resize: vertical;
@@ -223,6 +272,24 @@
 }
 
 @media (max-width: 600px) {
+  .metro-game-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .metro-game-layout > .metro-image,
+  .metro-game-controls {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .metro-game-layout > .metro-image {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .editor-inline {
     flex-direction: column;
   }
@@ -234,4 +301,79 @@
   .card-face p {
     font-size: 1.1rem;
   }
+}
+
+.game-page .metro-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.game-page .metro-board > .metro-image {
+  width: auto;
+  max-width: 100%;
+}
+
+.game-page .card-face {
+  border-color: #2f8f83;
+  background: linear-gradient(145deg, #ffffff, #dff3ed);
+  box-shadow: 0 15px 30px rgba(38, 50, 56, 0.14);
+}
+
+.game-page .card-back {
+  background: linear-gradient(145deg, #ffffff, #fff0b9);
+}
+
+.game-page .card-label,
+.game-page .game-status,
+.game-page .form-group label {
+  color: #2f8f83;
+}
+
+.game-page .card-backdrop {
+  border-color: #b8d8d1;
+  background: #dff3ed;
+}
+
+.game-page .editor-card {
+  background: #ffffff;
+  border-color: #c9dfda;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(38, 50, 56, 0.08);
+}
+
+.game-page .question-list-item {
+  background: #f4fbf9;
+  border: 1px solid #d7e9e5;
+}
+
+.game-page .question-summary {
+  flex: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #263238;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.game-page .question-summary:hover {
+  color: #2f8f83;
+}
+
+.game-page .question-answer-hint {
+  color: #627276;
+}
+
+.game-page select,
+.game-page option {
+  background: #ffffff;
+  color: #263238;
 }

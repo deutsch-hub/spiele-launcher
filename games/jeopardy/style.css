@@ -271,6 +271,84 @@
   }
 }
 
+.game-page .setup-card,
+.game-page .category-editor,
+.game-page .question-modal,
+.game-page .winner-panel {
+  background: #ffffff;
+  border-color: #c9dfda;
+  border-radius: 16px;
+  color: #263238;
+  box-shadow: 0 4px 12px rgba(38, 50, 56, 0.08);
+}
+
+.game-page .jeopardy-screen h1,
+.game-page .setup-card label,
+.game-page .category-editor h3,
+.game-page .turn-label,
+.game-page .modal-category,
+.game-page .modal-value,
+.game-page .winner-kicker {
+  color: #2f8f83;
+}
+
+.game-page .team-score {
+  color: #263238;
+  background: #ffffff;
+  border-color: #c9dfda;
+  border-radius: 12px;
+}
+
+.game-page .team-score span {
+  color: #2f8f83;
+}
+
+.game-page .active-team {
+  border-color: #2f8f83;
+  box-shadow: 0 0 12px rgba(47, 143, 131, 0.22);
+}
+
+.game-page .category-header {
+  color: #263238;
+  background: #ccefe4;
+  border-color: #8bcdbb;
+}
+
+.game-page .board-tile {
+  color: #263238;
+  background: #fff0b9;
+  border-color: #e5c96d;
+}
+
+.game-page .board-tile:hover:not(:disabled) {
+  background: #ffe59a;
+}
+
+.game-page .used-tile {
+  color: #8b9999;
+  background: #edf3f1;
+  border-color: #d7e1df;
+}
+
+.game-page .modal-backdrop {
+  background: rgba(38, 50, 56, 0.38);
+}
+
+.game-page .question-modal {
+  background: #ffffff;
+}
+
+.game-page .modal-answer {
+  color: #2f8f83;
+  background: #f4fbf9;
+}
+
+.game-page select,
+.game-page option {
+  background: #ffffff;
+  color: #263238;
+}
+
 .modal-backdrop {
   position: fixed;
   inset: 0;

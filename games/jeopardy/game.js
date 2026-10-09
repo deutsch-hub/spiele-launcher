@@ -30,6 +30,8 @@ function showScreen(screenId) {
   if (screenId === "setup-screen") {
     renderTeamFields();
     renderSetSelect();
+    const requestedScreen = new URLSearchParams(window.location.search).get("screen");
+    showScreen(requestedScreen === "editor-screen" ? "editor-screen" : "main-menu");
   }
   if (screenId === "editor-screen") {
     renderEditorSets();

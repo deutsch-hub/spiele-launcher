@@ -103,4 +103,7 @@ function checkAnswer(selectedLetter) {
   }, 1500);
 }
 
-document.addEventListener('DOMContentLoaded', () => showScreen('main-menu'));
+document.addEventListener('DOMContentLoaded', () => {
+  const requestedScreen = new URLSearchParams(window.location.search).get('screen');
+  showScreen(requestedScreen === 'editor-screen' ? 'editor-screen' : 'main-menu');
+});

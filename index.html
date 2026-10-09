@@ -6,102 +6,350 @@
   <title>Deutschunterricht Spiele-Lounge</title>
   <link rel="stylesheet" href="css/main.css">
   <style>
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      width: 100%;
-      margin-top: 20px;
+    .home-page {
+      --home-ink: #263238;
+      --home-muted: #627276;
+      --home-mint: #e9f8f4;
+      background: var(--home-mint);
+      color: var(--home-ink);
     }
+
+    .home-page header {
+      justify-content: center;
+      padding: 22px 24px 12px;
+      background: transparent;
+      border-bottom: 0;
+      box-shadow: none;
+    }
+
+    .home-page .logo-text {
+      color: var(--home-ink);
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .home-page .site-menu {
+      position: absolute;
+      left: 18px;
+      top: 16px;
+    }
+
+    .home-page .site-menu summary {
+      color: var(--home-ink);
+      border: 1px solid #b8d8d1;
+      background: #d4eee8;
+      border-radius: 6px;
+      font-size: 1.5rem;
+    }
+
+    .home-page .site-menu-links {
+      background: #f8fffd;
+      border-right-color: #b8d8d1;
+    }
+
+    .home-page .site-menu-links a {
+      color: var(--home-ink);
+    }
+
+    .home-page .site-menu-links a:hover {
+      color: var(--home-ink);
+      background: #dff3ed;
+    }
+
+    .home-page .container {
+      max-width: 680px;
+      padding: 12px 20px 32px;
+    }
+
+    .home-page.is-loading {
+      overflow: hidden;
+    }
+
+    .home-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      background: rgba(80, 92, 90, 0.58);
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.9s;
+    }
+
+    .home-loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .home-loader-content {
+      position: relative;
+      display: flex;
+      place-items: center;
+      justify-content: center;
+      width: 92px;
+      height: 92px;
+    }
+
+    .home-loader-icon {
+      display: flex;
+      gap: 2px;
+      font-size: 1.55rem;
+      line-height: 1;
+    }
+
+    .home-loader-ring {
+      position: absolute;
+      inset: 0;
+      border: 4px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      border-right-color: #d4eee8;
+      border-radius: 50%;
+      animation: home-loader-spin 1s linear infinite;
+    }
+
+    @keyframes home-loader-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .home-page .game-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 210px));
+      gap: 34px;
+      margin-top: 10px;
+      justify-content: center;
+    }
+
+    .game-grid {
+      width: 100%;
+    }
+
     .game-card {
       position: relative;
       overflow: hidden;
-      min-height: 220px;
-      background: var(--card-bg);
-      border: 2px solid var(--border-color);
-      border-radius: 12px;
-      padding: 25px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      width: 210px;
+      justify-self: center;
+      min-height: 285px;
+      padding: 0 14px 16px;
+      border: 1px solid #dce5e4;
+      border-radius: 16px;
+      color: var(--home-ink);
+      display: block;
       text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s, border-color 0.2s;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(38, 50, 56, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .game-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: var(--game-card-image);
-      background-size: cover;
-      background-position: center;
-      opacity: 0.45;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .game-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(3, 4, 8, 0.15), rgba(3, 4, 8, 0.9));
-    }
+
     .game-card > * {
       position: relative;
       z-index: 1;
     }
+
+    .game-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 132px;
+      background-image: var(--game-card-image);
+      background-size: cover;
+      background-position: center;
+      background-color: var(--card-color);
+      opacity: 1;
+      mix-blend-mode: normal;
+    }
+
+    .game-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 132px;
+      background: var(--card-color);
+      opacity: 0.32;
+      pointer-events: none;
+    }
+
+    .game-card:nth-child(1) {
+      --card-color: #fff0b9;
+      background: #fff0b9;
+    }
+
+    .game-card:nth-child(2) {
+      --card-color: #ccefe4;
+      background: #ccefe4;
+    }
+
+    .game-card:nth-child(3) {
+      --card-color: #ffcaca;
+      background: #ffcaca;
+    }
+
+    .game-card:nth-child(4) {
+      --card-color: #ded0f4;
+      background: #ded0f4;
+    }
+
     .game-card:hover {
       transform: translateY(-5px);
-      border-color: var(--accent-yellow);
+      box-shadow: 0 9px 18px rgba(38, 50, 56, 0.16);
     }
-    .game-card:hover::before {
-      opacity: 0.6;
-      transform: scale(1.04);
-    }
-    .game-card-placeholder {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .game-card-placeholder:hover {
-      transform: none;
-      border-color: var(--border-color);
-    }
-    .game-card-no-image::before {
-      background: linear-gradient(135deg, #3b1d5f, #0b5b6b);
-      opacity: 0.75;
-    }
-    .game-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0;
-      color: var(--accent-yellow);
+
+    .game-card-icon {
+      display: block;
+      height: 132px;
+      margin: 0 -14px 14px;
+      padding-top: 30px;
+      font-size: 4rem;
+      line-height: 1;
       text-align: center;
+    }
+
+    .game-card h3 {
+      margin: 0 0 8px;
+      color: var(--home-ink);
+      font-size: 1.2rem;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .game-card p {
+      display: block;
+      min-height: 42px;
+      margin: 0 0 12px;
+      color: var(--home-muted);
+      font-size: 0.82rem;
+      line-height: 1.35;
+      text-align: left;
+    }
+
+    .game-card-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #f1f5f4;
+      color: #627276;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .game-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    @media (max-width: 520px) {
+      .home-page .game-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .game-card {
+        width: min(210px, 100%);
+        justify-self: center;
+        min-height: 250px;
+        padding: 0 11px 12px;
+      }
+
+      .game-card::before,
+      .game-card::after {
+        height: 105px;
+      }
+
+      .game-card-icon {
+        height: 105px;
+        margin: 0 -11px 11px;
+        padding-top: 23px;
+        font-size: 3.2rem;
+      }
+
+      .game-card h3 {
+        font-size: 1rem;
+      }
+
+      .game-card p {
+        font-size: 0.74rem;
+      }
     }
   </style>
 </head>
-<body>
+<body class="home-page is-loading">
+
+  <div class="home-loader" id="home-loader" aria-label="Seite wird geladen">
+    <div class="home-loader-content">
+      <span class="home-loader-icon" aria-hidden="true">📚</span>
+      <span class="home-loader-ring" aria-hidden="true"></span>
+    </div>
+  </div>
 
   <header>
     <a href="index.html" class="logo-text">Deutsch-Spiele Hub</a>
+    <details class="site-menu">
+      <summary aria-label="Navigation öffnen"></summary>
+      <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <a href="index.html">Spiele</a>
+        <a href="fragensets.html">Fragensets</a>
+      </nav>
+    </details>
   </header>
 
   <div class="container">
     <div class="game-grid">
       <a href="games/wwm/index.html" class="game-card" style="--game-card-image: url('games/wwm/resources/wer-wird-millionaer.jpg');">
+        <span class="game-card-icon" aria-hidden="true">💡</span>
         <h3>Wer wird Millionär?</h3>
+        <p>Fragen beantworten und Wissen zeigen.</p>
+        <span class="game-card-tags">
+          <span class="game-card-badge">Einzel</span>
+          <span class="game-card-badge">Team</span>
+        </span>
       </a>
 
       <a href="games/wortarten-metro/index.html" class="game-card" style="--game-card-image: url('games/wortarten-metro/resource/wortartenMetroV1.1.jpg');">
+        <span class="game-card-icon" aria-hidden="true">🚇</span>
         <h3>Wortarten-Metro</h3>
+        <p>Finde heraus an welche Station dich der Satz bringt</p>
+        <span class="game-card-tags">
+          <span class="game-card-badge">Einzel</span>
+        </span>
       </a>
 
-      <a href="games/satzbau-puzzle/index.html" class="game-card game-card-no-image">
+      <a href="games/satzbau-puzzle/index.html" class="game-card">
+        <span class="game-card-icon" aria-hidden="true">🧩</span>
         <h3>Satzbau-Puzzle</h3>
+        <p>Setze die Wörter zu einem korrekten Satz zusammen</p>
+        <span class="game-card-tags">
+          <span class="game-card-badge">Einzel</span>
+        </span>
       </a>
 
-      <a href="games/jeopardy/index.html" class="game-card game-card-no-image">
+      <a href="games/jeopardy/index.html" class="game-card">
+        <span class="game-card-icon" aria-hidden="true">👥</span>
         <h3>Team-Duell</h3>
+        <p>Wähle Fragen aus unterschiedlichen Kategorien und sammle Punkte für dein Team</p>
+        <span class="game-card-tags">
+          <span class="game-card-badge">Team</span>
+        </span>
       </a>
     </div>
   </div>
+
+  <script>
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        document.getElementById("home-loader").classList.add("is-hidden");
+        document.body.classList.remove("is-loading");
+      }, 1200);
+    });
+  </script>
 
 </body>
 </html>

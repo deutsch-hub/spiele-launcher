@@ -1,4 +1,5 @@
 let currentSetKey = "";
+let editingQuestionIndex = null;
 
 function updateEditorSetsDropdown() {
   const sets = getQuizSets();
@@ -30,7 +31,11 @@ function createNewSet() {
 }
 
 function loadActiveSet() {
-  currentSetKey = document.getElementById('select-active-set').value;
+  const selectedSetKey = document.getElementById('select-active-set').value;
+  if (selectedSetKey !== currentSetKey && editingQuestionIndex !== null) {
+    resetQuestionForm();
+  }
+  currentSetKey = selectedSetKey;
   const formCard = document.getElementById('question-form-card');
   formCard.style.display = currentSetKey ? 'block' : 'none';
   if (currentSetKey) renderQuestionsList();
@@ -39,26 +44,66 @@ function loadActiveSet() {
 function addQuestion(event) {
   event.preventDefault();
   const sets = getQuizSets();
-  sets[currentSetKey].push({
+  const question = {
     difficulty: parseInt(document.getElementById('q-difficulty').value, 10),
-    question: document.getElementById('q-text').value,
+    question: document.getElementById('q-text').value.trim(),
     answers: {
-      A: document.getElementById('q-a').value,
-      B: document.getElementById('q-b').value,
-      C: document.getElementById('q-c').value,
-      D: document.getElementById('q-d').value
+      A: document.getElementById('q-a').value.trim(),
+      B: document.getElementById('q-b').value.trim(),
+      C: document.getElementById('q-c').value.trim(),
+      D: document.getElementById('q-d').value.trim()
     },
     correct: document.getElementById('q-correct').value
-  });
+  };
+
+  if (editingQuestionIndex === null) {
+    sets[currentSetKey].push(question);
+  } else {
+    sets[currentSetKey][editingQuestionIndex] = question;
+  }
+
   saveQuizSets(sets);
-  document.getElementById('question-form').reset();
+  resetQuestionForm();
   renderQuestionsList();
+}
+
+function editQuestion(index) {
+  const question = getQuizSets()[currentSetKey][index];
+  if (!question) return;
+
+  editingQuestionIndex = index;
+  document.getElementById('q-difficulty').value = question.difficulty;
+  document.getElementById('q-text').value = question.question;
+  document.getElementById('q-a').value = question.answers.A;
+  document.getElementById('q-b').value = question.answers.B;
+  document.getElementById('q-c').value = question.answers.C;
+  document.getElementById('q-d').value = question.answers.D;
+  document.getElementById('q-correct').value = question.correct;
+  document.getElementById('question-submit-button').textContent = 'Änderungen speichern';
+  document.getElementById('cancel-edit-button').hidden = false;
+  document.getElementById('q-text').focus();
+}
+
+function cancelEdit() {
+  resetQuestionForm();
+}
+
+function resetQuestionForm() {
+  editingQuestionIndex = null;
+  document.getElementById('question-form').reset();
+  document.getElementById('question-submit-button').textContent = 'Frage speichern';
+  document.getElementById('cancel-edit-button').hidden = true;
 }
 
 function deleteQuestion(index) {
   const sets = getQuizSets();
   sets[currentSetKey].splice(index, 1);
   saveQuizSets(sets);
+  if (editingQuestionIndex === index) {
+    resetQuestionForm();
+  } else if (editingQuestionIndex !== null && editingQuestionIndex > index) {
+    editingQuestionIndex -= 1;
+  }
   renderQuestionsList();
 }
 
@@ -70,7 +115,10 @@ function renderQuestionsList() {
     const item = document.createElement('div');
     item.className = 'question-list-item';
     item.innerHTML = `
-      <div><strong>[Stufe ${question.difficulty}]</strong> ${question.question} (Richtig: ${question.correct})</div>
+      <button class="question-summary" type="button" onclick="editQuestion(${index})">
+        <strong>[Stufe ${question.difficulty}]</strong> ${question.question}
+        <span class="question-answer-hint">Antworten anzeigen und bearbeiten</span>
+      </button>
       <button class="btn btn-secondary delete-question-btn" onclick="deleteQuestion(${index})">Löschen</button>
     `;
     listContainer.appendChild(item);

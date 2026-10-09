@@ -196,3 +196,69 @@
     flex-direction: column;
   }
 }
+
+.game-page .puzzle-screen {
+  background: #ffffff;
+  border-color: #c9dfda;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(38, 50, 56, 0.08);
+}
+
+.game-page .puzzle-screen h1,
+.game-page .puzzle-status,
+.game-page .form-group label {
+  color: #2f8f83;
+}
+
+.game-page .word-bank,
+.game-page .answer-area,
+.game-page .setup-card {
+  background: #f4fbf9;
+  border-color: #c9dfda;
+  color: #263238;
+}
+
+.game-page .answer-area {
+  border-style: dashed;
+  border-color: #2f8f83;
+}
+
+.game-page .word-button {
+  color: #263238;
+  background: #fff0b9;
+  border-color: #e5c96d;
+  border-radius: 999px;
+}
+
+.game-page .word-button:hover,
+.game-page .word-button:focus-visible {
+  background: #ffe59a;
+}
+
+.game-page .answer-word {
+  background: #ccefe4;
+  border-color: #8bcdbb;
+}
+
+.game-page .answer-placeholder {
+  color: #627276;
+}
+
+.game-page .feedback.success {
+  color: #2f8f83;
+}
+
+.game-page .feedback.error {
+  color: #c76b6b;
+}
+
+.game-page .question-list-item {
+  background: #f4fbf9;
+  border: 1px solid #d7e9e5;
+}
+
+.game-page select,
+.game-page option {
+  background: #ffffff;
+  color: #263238;
+}

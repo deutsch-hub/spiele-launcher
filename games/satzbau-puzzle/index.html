@@ -7,9 +7,16 @@
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="game-page">
   <header>
     <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+    <details class="site-menu">
+      <summary aria-label="Navigation öffnen"></summary>
+      <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <a href="../../index.html">Spiele</a>
+        <a href="../../fragensets.html">Fragensets</a>
+      </nav>
+    </details>
   </header>
 
   <main class="container puzzle-container">
@@ -18,7 +25,6 @@
       <p class="intro">Baue die Sätze aus den Wörtern richtig zusammen.</p>
       <div class="puzzle-actions">
         <button class="btn" type="button" onclick="showScreen('game-setup')">Spiel starten</button>
-        <button class="btn btn-secondary" type="button" onclick="showScreen('editor-screen')">Sätze einstellen</button>
       </div>
       <a href="../../index.html" class="btn btn-secondary back-link">Zurück zur Spieleauswahl</a>
     </section>
@@ -87,7 +93,7 @@
         <div id="sentences-list"></div>
       </div>
 
-      <button class="btn btn-secondary" type="button" onclick="showScreen('main-menu')">Zum Hauptmenü</button>
+      <a class="btn btn-secondary" href="../../index.html">Zurück zur Spieleauswahl</a>
     </section>
   </main>
 

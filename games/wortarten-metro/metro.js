@@ -1,6 +1,7 @@
 let currentSetKey = "";
 let currentCards = [];
 let currentCardIndex = -1;
+let editingSentenceIndex = null;
 
 function showScreen(screenId) {
   document.querySelectorAll('.metro-screen').forEach(screen => {
@@ -44,7 +45,7 @@ function prepareGame() {
   const sets = getMetroSets();
   const setKeys = Object.keys(sets).filter(key => sets[key].length > 0);
   if (setKeys.length === 0) {
-    document.getElementById('game-status').innerText = 'Bitte füge im Editor zuerst Satz-Karten hinzu.';
+    alert('Bitte füge im Editor zuerst Satz-Karten hinzu.');
     currentCards = [];
     resetCard();
     return;
@@ -66,7 +67,6 @@ function drawSentence() {
   document.getElementById('sentence-text').innerText = card.sentence;
   document.getElementById('solution-text').innerText = card.solution;
   document.getElementById('sentence-card').classList.remove('is-flipped');
-  document.getElementById('game-status').innerText = `Karte ${currentCardIndex + 1} von ${currentCards.length}`;
 }
 
 function resetCard() {
@@ -108,7 +108,11 @@ function createNewSet() {
 }
 
 function loadActiveSet() {
-  currentSetKey = document.getElementById('select-active-set').value;
+  const selectedSetKey = document.getElementById('select-active-set').value;
+  if (selectedSetKey !== currentSetKey && editingSentenceIndex !== null) {
+    resetSentenceForm();
+  }
+  currentSetKey = selectedSetKey;
   document.getElementById('question-form-card').style.display = currentSetKey ? 'block' : 'none';
   if (currentSetKey) renderQuestionsList();
 }
@@ -116,19 +120,54 @@ function loadActiveSet() {
 function addSentence(event) {
   event.preventDefault();
   const sets = getMetroSets();
-  sets[currentSetKey].push({
+  const card = {
     sentence: document.getElementById('sentence-input').value.trim(),
     solution: document.getElementById('solution-input').value.trim()
-  });
+  };
+
+  if (editingSentenceIndex === null) {
+    sets[currentSetKey].push(card);
+  } else {
+    sets[currentSetKey][editingSentenceIndex] = card;
+  }
+
   saveMetroSets(sets);
-  document.getElementById('question-form').reset();
+  resetSentenceForm();
   renderQuestionsList();
+}
+
+function editSentence(index) {
+  const card = getMetroSets()[currentSetKey][index];
+  if (!card) return;
+
+  editingSentenceIndex = index;
+  document.getElementById('sentence-input').value = card.sentence;
+  document.getElementById('solution-input').value = card.solution;
+  document.getElementById('sentence-submit-button').textContent = 'Änderungen speichern';
+  document.getElementById('cancel-sentence-edit-button').hidden = false;
+  document.getElementById('sentence-input').focus();
+}
+
+function cancelSentenceEdit() {
+  resetSentenceForm();
+}
+
+function resetSentenceForm() {
+  editingSentenceIndex = null;
+  document.getElementById('question-form').reset();
+  document.getElementById('sentence-submit-button').textContent = 'Satz-Karte speichern';
+  document.getElementById('cancel-sentence-edit-button').hidden = true;
 }
 
 function deleteSentence(index) {
   const sets = getMetroSets();
   sets[currentSetKey].splice(index, 1);
   saveMetroSets(sets);
+  if (editingSentenceIndex === index) {
+    resetSentenceForm();
+  } else if (editingSentenceIndex !== null && editingSentenceIndex > index) {
+    editingSentenceIndex -= 1;
+  }
   renderQuestionsList();
 }
 
@@ -138,10 +177,16 @@ function renderQuestionsList() {
   (getMetroSets()[currentSetKey] || []).forEach((card, index) => {
     const item = document.createElement('div');
     item.className = 'question-list-item';
-    item.innerHTML = `<div><strong>${card.sentence}</strong><br>${card.solution}</div>
+    item.innerHTML = `<button class="question-summary" type="button" onclick="editSentence(${index})">
+        <strong>${card.sentence}</strong><br>
+        <span class="question-answer-hint">${card.solution}</span>
+      </button>
       <button class="btn btn-secondary delete-question-btn" onclick="deleteSentence(${index})">Löschen</button>`;
     list.appendChild(item);
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => showScreen('main-menu'));
+document.addEventListener('DOMContentLoaded', () => {
+  const requestedScreen = new URLSearchParams(window.location.search).get('screen');
+  showScreen(requestedScreen === 'editor-screen' ? 'editor-screen' : 'main-menu');
+});

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fragensets verwalten</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .sets-page {
+      max-width: 900px;
+    }
+
+    .sets-intro {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .sets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .sets-card {
+      padding: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .sets-card h2 {
+      color: var(--accent-yellow);
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .sets-card p {
+      min-height: 48px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body class="game-page">
+  <header>
+    <a href="index.html" class="logo-text">Deutsch-Spiele Hub</a>
+    <details class="site-menu">
+      <summary aria-label="Navigation öffnen"></summary>
+      <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <a href="index.html">Spiele</a>
+        <a href="fragensets.html">Fragensets</a>
+      </nav>
+    </details>
+  </header>
+
+  <main class="container sets-page">
+    <h1>Fragensets verwalten</h1>
+    <p class="sets-intro">Wähle ein Spiel aus, um die dazugehörigen Fragen, Karten oder Sätze einzustellen.</p>
+    <div class="sets-grid">
+      <section class="sets-card">
+        <h2>Wer wird Millionär?</h2>
+        <p>Fragen, Antworten und richtige Lösungen verwalten.</p>
+        <a class="btn" href="games/wwm/index.html?screen=editor-screen">Fragensets einstellen</a>
+      </section>
+      <section class="sets-card">
+        <h2>Wortarten-Metro</h2>
+        <p>Satzkarten und Lösungen verwalten.</p>
+        <a class="btn" href="games/wortarten-metro/index.html?screen=editor-screen">Kartensets einstellen</a>
+      </section>
+      <section class="sets-card">
+        <h2>Satzbau-Puzzle</h2>
+        <p>Sätze für das Puzzle verwalten.</p>
+        <a class="btn" href="games/satzbau-puzzle/index.html?screen=editor-screen">Satzsets einstellen</a>
+      </section>
+      <section class="sets-card">
+        <h2>Team-Duell</h2>
+        <p>Kategorien und Fragen für das Teamspiel verwalten.</p>
+        <a class="btn" href="games/jeopardy/index.html?screen=editor-screen">Sets einstellen</a>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

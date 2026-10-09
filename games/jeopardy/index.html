@@ -7,9 +7,16 @@
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="game-page">
   <header>
     <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+    <details class="site-menu">
+      <summary aria-label="Navigation öffnen"></summary>
+      <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <a href="../../index.html">Spiele</a>
+        <a href="../../fragensets.html">Fragensets</a>
+      </nav>
+    </details>
   </header>
 
   <main class="container jeopardy-container">
@@ -17,7 +24,6 @@
       <h1>Team-Duell</h1>
       <p class="intro">Spielt in Teams und testet euer Deutschwissen.</p>
       <button class="btn" type="button" onclick="showScreen('setup-screen')">Spiel starten</button>
-      <button class="btn btn-secondary" type="button" onclick="showScreen('editor-screen')">Sets einstellen</button>
       <a href="../../index.html" class="btn btn-secondary">Zurück zur Spieleauswahl</a>
     </section>
 
@@ -78,7 +84,7 @@
         <p class="winner-kicker">Das Team-Duell ist beendet!</p>
         <h2 id="winner-title"></h2>
         <p id="winner-score"></p>
-        <button class="btn" type="button" onclick="showScreen('main-menu')">Zum Hauptmenü</button>
+        <a class="btn btn-secondary" href="../../index.html">Zurück zur Spieleauswahl</a>
       </div>
     </section>
   </main>

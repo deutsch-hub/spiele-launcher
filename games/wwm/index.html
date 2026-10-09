@@ -8,10 +8,17 @@
   <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="game-page">
 
   <header>
     <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+    <details class="site-menu">
+      <summary aria-label="Navigation öffnen"></summary>
+      <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <a href="../../index.html">Spiele</a>
+        <a href="../../fragensets.html">Fragensets</a>
+      </nav>
+    </details>
   </header>
 
   <div class="container">
@@ -25,7 +32,6 @@
       <h2>Wer wird Millionär?</h2>
       <div class="menu-actions">
         <button class="btn" onclick="showScreen('game-setup')">Spiel starten</button>
-        <button class="btn btn-secondary" onclick="showScreen('editor-screen')">Fragen anpassen</button>
       </div>
       <a href="../../index.html" class="btn btn-secondary">Zurück zur Spieleauswahl</a>
     </div>
@@ -34,11 +40,11 @@
       <h2>Spiel starten</h2>
       <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); max-width: 400px; margin: 0 auto;">
         <label style="display: block; margin-bottom: 10px; color: var(--accent-yellow);">Wähle ein Fragenset:</label>
-        <select id="select-set-game" style="width: 100%; padding: 10px; background: #111; color: white; border-radius: 5px; margin-bottom: 15px;"></select>
+        <select id="select-set-game" class="wwm-set-select"></select>
         <button class="btn" onclick="launchGame()">Spiel starten 🚀</button>
       </div>
       <div class="screen-navigation">
-        <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+        <a class="btn btn-secondary" href="../../index.html">Zurück zur Spieleauswahl</a>
       </div>
     </div>
 
@@ -118,7 +124,8 @@
               <option value="D">D</option>
             </select>
           </div>
-          <button type="submit" class="btn">Frage speichern</button>
+          <button id="question-submit-button" type="submit" class="btn">Frage speichern</button>
+          <button id="cancel-edit-button" type="button" class="btn btn-secondary" onclick="cancelEdit()" hidden>Bearbeiten abbrechen</button>
         </form>
         <h3 class="question-list-heading">Enthaltene Fragen:</h3>
         <div id="questions-list"></div>
@@ -132,7 +139,7 @@
       </div>
 
       <div class="screen-navigation">
-        <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+        <a class="btn btn-secondary" href="../../index.html">Zurück zur Spieleauswahl</a>
       </div>
     </div>
 
