@@ -15,6 +15,11 @@
     <details class="site-menu">
       <summary aria-label="Navigation öffnen"></summary>
       <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <div class="sound-controls">
+          <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true"></button>
+          <label class="sound-volume-label" for="sound-volume">Lautstärke</label>
+          <input class="sound-volume" id="sound-volume" type="range" min="0" max="100" value="100" aria-label="Lautstärke">
+        </div>
         <a href="../../index.html">Spiele</a>
         <a href="../../fragensets.html">Fragensets</a>
       </nav>
@@ -38,7 +43,7 @@
 
     <div id="game-setup" class="wwm-screen" style="display: none;">
       <h2>Spiel starten</h2>
-      <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); max-width: 400px; margin: 0 auto;">
+      <div class="game-setup-card">
         <label style="display: block; margin-bottom: 10px; color: var(--accent-yellow);">Wähle ein Fragenset:</label>
         <select id="select-set-game" class="wwm-set-select"></select>
         <button class="btn" onclick="launchGame()">Spiel starten 🚀</button>
@@ -55,27 +60,41 @@
         </div>
       </div>
 
-      <div class="status-bar" id="game-status">Frage 1</div>
+      <div class="wwm-question-content">
+        <div class="status-bar" id="game-status">Frage 1</div>
 
-      <div class="wwm-box" id="question-text">Frage wird geladen...</div>
+        <div class="wwm-box" id="question-text">Frage wird geladen...</div>
 
-      <div class="wwm-answers">
-        <button class="wwm-answer-btn" data-letter="A" onclick="checkAnswer('A')">
-          <span class="prefix">A</span> <span id="ans-A">---</span>
-        </button>
-        <button class="wwm-answer-btn" data-letter="B" onclick="checkAnswer('B')">
-          <span class="prefix">B</span> <span id="ans-B">---</span>
-        </button>
-        <button class="wwm-answer-btn" data-letter="C" onclick="checkAnswer('C')">
-          <span class="prefix">C</span> <span id="ans-C">---</span>
-        </button>
-        <button class="wwm-answer-btn" data-letter="D" onclick="checkAnswer('D')">
-          <span class="prefix">D</span> <span id="ans-D">---</span>
+        <div class="wwm-answers">
+          <button class="wwm-answer-btn" data-letter="A" onclick="checkAnswer('A')">
+            <span class="prefix">A</span> <span id="ans-A">---</span>
+          </button>
+          <button class="wwm-answer-btn" data-letter="B" onclick="checkAnswer('B')">
+            <span class="prefix">B</span> <span id="ans-B">---</span>
+          </button>
+          <button class="wwm-answer-btn" data-letter="C" onclick="checkAnswer('C')">
+            <span class="prefix">C</span> <span id="ans-C">---</span>
+          </button>
+          <button class="wwm-answer-btn" data-letter="D" onclick="checkAnswer('D')">
+            <span class="prefix">D</span> <span id="ans-D">---</span>
+          </button>
+        </div>
+
+        <button class="btn next-question-btn" id="next-question-button" type="button" onclick="nextQuestion()" disabled>
+          Nächste Frage
         </button>
       </div>
 
       <div style="text-align: center; margin-top: 30px;">
         <button class="btn btn-secondary" onclick="showScreen('main-menu')">Zurück zum Hauptmenü</button>
+      </div>
+
+      <div class="wwm-finish-overlay" id="wwm-finish-overlay" hidden>
+        <div class="wwm-finish-dialog" role="status" aria-live="polite">
+          <p class="wwm-finish-kicker">Das Spiel ist beendet!</p>
+          <h2>Herzlichen Glückwunsch!</h2>
+          <button class="btn" id="finish-main-menu-button" type="button">Zum Hauptmenü</button>
+        </div>
       </div>
     </div>
 
@@ -146,6 +165,7 @@
   </div>
 
   <script src="storage.js"></script>
+  <script src="../../js/audio.js"></script>
   <script src="game.js"></script>
   <script src="editor.js"></script>
 </body>

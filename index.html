@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deutschunterricht Spiele-Lounge</title>
   <link rel="stylesheet" href="css/main.css">
+  <script>
+    if (sessionStorage.getItem("home-loader-seen") === "true") {
+      document.documentElement.classList.add("home-loader-seen");
+    }
+  </script>
   <style>
     .home-page {
       --home-ink: #263238;
@@ -64,6 +69,10 @@
 
     .home-page.is-loading {
       overflow: hidden;
+    }
+
+    .home-loader-seen .home-loader {
+      display: none;
     }
 
     .home-loader {
@@ -197,6 +206,11 @@
       background: #ded0f4;
     }
 
+    .game-card:nth-child(5) {
+      --card-color: #c9d8ff;
+      background: #c9d8ff;
+    }
+
     .game-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 9px 18px rgba(38, 50, 56, 0.16);
@@ -281,7 +295,7 @@
     }
   </style>
 </head>
-<body class="home-page is-loading">
+<body class="home-page">
 
   <div class="home-loader" id="home-loader" aria-label="Seite wird geladen">
     <div class="home-loader-content">
@@ -295,6 +309,11 @@
     <details class="site-menu">
       <summary aria-label="Navigation öffnen"></summary>
       <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <div class="sound-controls">
+          <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true"></button>
+          <label class="sound-volume-label" for="sound-volume">Lautstärke</label>
+          <input class="sound-volume" id="sound-volume" type="range" min="0" max="100" value="100" aria-label="Lautstärke">
+        </div>
         <a href="index.html">Spiele</a>
         <a href="fragensets.html">Fragensets</a>
       </nav>
@@ -339,17 +358,36 @@
           <span class="game-card-badge">Team</span>
         </span>
       </a>
+
+      <a href="games/quiz-duell/index.html" class="game-card">
+        <span class="game-card-icon" aria-hidden="true">🛎️</span>
+        <h3>Quiz-Duell</h3>
+        <p>Duelliere dich alleine oder als Team im Spiel um Schnelligkeit</p>
+        <span class="game-card-tags">
+          <span class="game-card-badge">Einzel</span>
+          <span class="game-card-badge">Team</span>
+        </span>
+      </a>
     </div>
   </div>
 
   <script>
-    window.addEventListener("load", () => {
-      window.setTimeout(() => {
-        document.getElementById("home-loader").classList.add("is-hidden");
-        document.body.classList.remove("is-loading");
-      }, 1200);
-    });
+    const loader = document.getElementById("home-loader");
+
+    if (document.documentElement.classList.contains("home-loader-seen")) {
+      loader.classList.add("is-hidden");
+    } else {
+      sessionStorage.setItem("home-loader-seen", "true");
+      document.body.classList.add("is-loading");
+      window.addEventListener("load", () => {
+        window.setTimeout(() => {
+          loader.classList.add("is-hidden");
+          document.body.classList.remove("is-loading");
+        }, 1200);
+      });
+    }
   </script>
+  <script src="js/audio.js"></script>
 
 </body>
 </html>

@@ -13,6 +13,11 @@
     <details class="site-menu">
       <summary aria-label="Navigation öffnen"></summary>
       <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <div class="sound-controls">
+          <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true"></button>
+          <label class="sound-volume-label" for="sound-volume">Lautstärke</label>
+          <input class="sound-volume" id="sound-volume" type="range" min="0" max="100" value="100" aria-label="Lautstärke">
+        </div>
         <a href="../../index.html">Spiele</a>
         <a href="../../fragensets.html">Fragensets</a>
       </nav>
@@ -31,7 +36,7 @@
 
     <section id="game-setup" class="metro-screen" style="display: none;">
       <h1>Spiel starten</h1>
-      <div class="editor-card setup-card">
+      <div class="game-setup-card editor-card setup-card">
         <label for="select-set-game">Kartenset:</label>
         <select id="select-set-game"></select>
         <button class="btn" onclick="startGame()">Spiel starten</button>
@@ -109,6 +114,7 @@
   </main>
 
   <script src="storage.js"></script>
+  <script src="../../js/audio.js"></script>
   <script src="metro.js"></script>
 </body>
 </html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz-Duell</title>
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="game-page">
+  <header>
+    <a href="../../index.html" class="logo-text">Deutsch-Spiele Hub</a>
+    <details class="site-menu">
+      <summary aria-label="Navigation öffnen"></summary>
+      <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <div class="sound-controls">
+          <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true"></button>
+          <label class="sound-volume-label" for="sound-volume">Lautstärke</label>
+          <input class="sound-volume" id="sound-volume" type="range" min="0" max="100" value="100" aria-label="Lautstärke">
+        </div>
+        <a href="../../index.html">Spiele</a>
+        <a href="../../fragensets.html">Fragensets</a>
+      </nav>
+    </details>
+  </header>
+
+  <main class="quiz-duell-container">
+    <section id="main-menu" class="quiz-duell-screen">
+      <div class="quiz-duell-logo" aria-hidden="true">🃏</div>
+      <h1>Quiz-Duell</h1>
+      <div class="quiz-duell-actions">
+        <button class="btn" type="button" onclick="showScreen('game-setup')">Spiel starten</button>
+      </div>
+      <a href="../../index.html" class="btn btn-secondary">Zurück zur Spieleauswahl</a>
+    </section>
+
+    <section id="game-setup" class="quiz-duell-screen" style="display: none;">
+      <h1>Spiel starten</h1>
+      <div class="game-setup-card editor-card setup-card">
+        <label for="select-set-game">Fragenset:</label>
+        <select id="select-set-game"></select>
+        <button class="btn" type="button" onclick="startGame()">Spiel starten</button>
+      </div>
+      <button class="btn btn-secondary" type="button" onclick="showScreen('main-menu')">Zurück</button>
+    </section>
+
+    <section id="game-screen" class="quiz-duell-screen" style="display: none;">
+      <h1>Quiz-Duell</h1>
+      <div class="quiz-status" id="quiz-status" aria-live="polite"></div>
+      <div class="card-stack" aria-live="polite">
+        <div class="quiz-card card-backdrop"></div>
+        <div class="quiz-card card-backdrop card-backdrop-small"></div>
+        <article id="quiz-card" class="quiz-card" onclick="flipCard()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); flipCard(); }" role="button" tabindex="0" aria-label="Fragekarte umdrehen">
+          <div class="card-face card-front">
+            <span class="card-label">Frage</span>
+            <p id="question-text"></p>
+          </div>
+          <div class="card-face card-back">
+            <span class="card-label">Lösung</span>
+            <p id="solution-text"></p>
+          </div>
+        </article>
+      </div>
+      <div class="quiz-duell-actions">
+        <button class="btn" type="button" onclick="nextQuestion()">Nächste Frage</button>
+      </div>
+      <a class="btn btn-secondary" href="../../index.html">Zurück zur Spieleauswahl</a>
+    </section>
+
+    <section id="editor-screen" class="quiz-duell-screen" style="display: none;">
+      <h1>Fragensets einstellen</h1>
+      <div class="editor-card">
+        <h2>Set auswählen oder anlegen</h2>
+        <div class="editor-inline">
+          <input id="new-set-name" type="text" placeholder="z. B. Klasse 8">
+          <button class="btn" type="button" onclick="createNewSet()">Set erstellen</button>
+        </div>
+        <div class="form-group">
+          <label for="select-active-set">Aktives Set:</label>
+          <select id="select-active-set" onchange="loadActiveSet()"></select>
+        </div>
+      </div>
+
+      <div class="editor-card" id="question-form-card" style="display: none;">
+        <h2>Neue Frage hinzufügen</h2>
+        <form id="question-form" onsubmit="addQuestion(event)">
+          <div class="form-group">
+            <label for="q-text">Fragetext:</label>
+            <input type="text" id="q-text" required placeholder="Frage eingeben...">
+          </div>
+          <div class="form-group">
+            <label for="q-solution">Lösung:</label>
+            <textarea id="q-solution" required placeholder="Lösung eingeben..."></textarea>
+          </div>
+          <button id="question-submit-button" type="submit" class="btn">Frage speichern</button>
+          <button id="cancel-edit-button" type="button" class="btn btn-secondary" onclick="cancelEdit()" hidden>Bearbeiten abbrechen</button>
+        </form>
+        <h2 class="question-list-heading">Fragen im Set</h2>
+        <div id="questions-list"></div>
+      </div>
+
+      <div class="editor-card">
+        <h2>Backup / Import &amp; Export</h2>
+        <button class="btn btn-secondary" type="button" onclick="exportQuizDuelSets()">Sets herunterladen</button>
+        <button class="btn btn-secondary" type="button" onclick="document.getElementById('import-file').click()">Sets hochladen</button>
+        <input type="file" id="import-file" hidden onchange="importQuizDuelSets(event)" accept=".json">
+      </div>
+
+      <a class="btn btn-secondary" href="../../index.html">Zurück zur Spieleauswahl</a>
+    </section>
+  </main>
+
+  <script src="storage.js"></script>
+  <script src="../../js/audio.js"></script>
+  <script src="editor.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

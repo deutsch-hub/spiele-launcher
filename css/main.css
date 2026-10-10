@@ -23,6 +23,7 @@ body {
 }
 
 header {
+  position: relative;
   width: 100%;
   padding: 15px 30px;
   background: rgba(0, 0, 0, 0.4);
@@ -31,6 +32,46 @@ header {
   align-items: center;
   gap: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sound-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 18px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sound-toggle {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.sound-volume {
+  width: 100px;
+  accent-color: var(--accent-yellow);
+  cursor: pointer;
+}
+
+.sound-volume-label {
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.sound-toggle:hover,
+.sound-toggle:focus-visible,
+.sound-volume:focus-visible {
+  background: var(--card-bg);
 }
 
 .site-menu {
@@ -64,8 +105,7 @@ header {
   content: "×";
 }
 
-.site-menu[open]::after {
-  content: "";
+.site-menu-overlay {
   position: fixed;
   z-index: 99;
   inset: 0;
@@ -177,7 +217,7 @@ header {
 }
 
 .game-page .btn {
-  background: #f3c95f;
+  background: #eab308;
   color: #263238;
   border-radius: 999px;
   box-shadow: 0 3px 0 rgba(38, 50, 56, 0.08);
@@ -208,6 +248,45 @@ header {
   background: #ffffff;
   color: #263238;
   border-color: #b8d8d1;
+}
+
+.game-page .game-setup-card {
+  width: min(500px, 100%);
+  margin: 20px auto;
+  padding: 24px;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid #c9dfda;
+  border-radius: 16px;
+  color: #263238;
+  box-shadow: 0 4px 12px rgba(38, 50, 56, 0.08);
+}
+
+.game-page .game-setup-card label {
+  display: block;
+  margin: 0 0 8px;
+  color: #2f8f83;
+  font-weight: 600;
+}
+
+.game-page .game-setup-card label:not(:first-child) {
+  margin-top: 16px;
+}
+
+.game-page .game-setup-card select,
+.game-page .game-setup-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 0 0 16px;
+  border: 1px solid #b8d8d1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #263238;
+  font: inherit;
+}
+
+.game-page .game-setup-card .btn {
+  margin-top: 4px;
 }
 
 .game-page .editor-card input,

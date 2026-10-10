@@ -47,6 +47,11 @@
     <details class="site-menu">
       <summary aria-label="Navigation öffnen"></summary>
       <nav class="site-menu-links" aria-label="Hauptnavigation">
+        <div class="sound-controls">
+          <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true"></button>
+          <label class="sound-volume-label" for="sound-volume">Lautstärke</label>
+          <input class="sound-volume" id="sound-volume" type="range" min="0" max="100" value="100" aria-label="Lautstärke">
+        </div>
         <a href="index.html">Spiele</a>
         <a href="fragensets.html">Fragensets</a>
       </nav>
@@ -77,7 +82,13 @@
         <p>Kategorien und Fragen für das Teamspiel verwalten.</p>
         <a class="btn" href="games/jeopardy/index.html?screen=editor-screen">Sets einstellen</a>
       </section>
+      <section class="sets-card">
+        <h2>Quiz-Duell</h2>
+        <p>Eigene Fragen und richtige Lösungen für das Quiz-Duell verwalten.</p>
+        <a class="btn" href="games/quiz-duell/index.html?screen=editor-screen">Fragensets einstellen</a>
+      </section>
     </div>
   </main>
+  <script src="js/audio.js"></script>
 </body>
 </html>
